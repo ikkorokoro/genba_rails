@@ -10,12 +10,11 @@ ja:
       task: 'タスク'
     attributes:
       task:
-        object: r'物品名'
-        price: '購入金額'
-        store: '購入場所'
-        category: 'カテゴリ'
-        rate: '星評価'
-        content: '感想'
+        id: 'ID'
+        name: '名称'
+        description: '詳しい説明'
+        created_at: '登録日時'
+        updated_at: '更新日時'
       profile:
         name: '名前'
         affiliation: '所属部隊'
