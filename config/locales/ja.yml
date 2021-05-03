@@ -6,9 +6,11 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      task: 'タスク'
     attributes:
-      article:
-        object: '物品名'
+      task:
+        object: r'物品名'
         price: '購入金額'
         store: '購入場所'
         category: 'カテゴリ'
