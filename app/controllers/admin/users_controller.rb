@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+
   def index
     @users = User.all
   end
@@ -16,7 +17,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def create 
-    @user = User.new(user_parmas)
+    @user = User.new(user_params)
     if @user.save
       redirect_to admin_user_url(@user), notice: "ユーザー「#{@user.name}を登録しました」"
     else
