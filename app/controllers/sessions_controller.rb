@@ -29,7 +29,7 @@ end
 =begin 
 * authenticateメソッド
 has_secure_passwordを記述した時に、自動で追加された認証のメソッド
-引数のpasswordをハッシュ化して,データベースに保存されてあるdigestと一致するか調べる。
+引数のpasswordをハッシュ化して,保存されてあるdigestと一致するか調べる。
 * find_byメソッド
 ユーザーデータが見つからない場合、変数userはnilとなるので、条件分岐のauthenticateメソッドの処理の前でぼっち演算子を用いて
 エラーにならないように回避する
