@@ -18,3 +18,28 @@ User.where(admin: true).first
 
 コンソール
 # User.where(admin: true).to_sql
+
+
+クエリー用メソッド
+絞り込み条件
+where
+order
+joins
+group
+select
+limit
+all
+none
+など
+
+実行部分
+find
+find_by
+first
+last
+exists?
+count
+average
+delete_all
+destroy_all
+など
