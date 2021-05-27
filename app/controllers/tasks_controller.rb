@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   簡単に閲覧、編集、削除することができてしまうのでcurrent_user.task.findし記述してデータを探すようにする
 =end
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.order(created_at: :desc)
   end
 
   def show
