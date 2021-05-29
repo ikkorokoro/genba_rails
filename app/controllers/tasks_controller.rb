@@ -1,14 +1,11 @@
 class TasksController < ApplicationController
-=begin 
-  もし悪意あるユーザーがURLに他のユーザーが作った、taskのid入れて,もしそのデータが存在していれば
-  簡単に閲覧、編集、削除することができてしまうのでcurrent_user.task.findし記述してデータを探すようにする
-=end
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+
   def index
     @tasks = current_user.tasks.order(created_at: :desc)
   end
 
   def show
-    @task = current_user.tasks.find(params[:id])
   end
 
   def new
@@ -25,17 +22,14 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task =current_user.tasks.find(params[:id])
   end
 
   def update
-  task = current_user.tasks.find(params[:id])
   task.update!(task_params)
   redirect_to tasks_url, notice: "タスク「#{task.name}」を登録しました"
   end
 
   def destroy
-    task = Task.find(params[:id])
     task.destroy!
     redirect_to tasks_url, notice: "タスク「#{task.name}を削除しました。」"
   end
@@ -45,4 +39,17 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name, :description)
   end
+
+  def set_task
+    @task = current_user.tasks.find(params[:id])
+  end
+=begin 
+  もし悪意あるユーザーがURLに他のユーザーが作った、taskのid入れて,もしそのデータが存在していれば
+  簡単に閲覧、編集、削除することができてしまうのでcurrent_user.task.findと記述し,ユーザーのデータの中かデータを探すようにする
+=end
+=begin 
+処理に対して変更がある場合、重複箇所は全て変更しないければいけなく、
+手間やミスも起こしやすくなってしまうので重複を避けるように共通化を行う 
+=end
+
 end
