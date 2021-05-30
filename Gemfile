@@ -33,7 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rails_autolink'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem 'rspec-rails', '~> 3.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
