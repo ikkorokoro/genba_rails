@@ -5,6 +5,7 @@ describe 'タスク管理機能' do
     let(:user_a) {FactoryBot.create(:user, name: 'ユーザーA', email: 'a@example.com')}
     let(:user_b) {FactoryBot.create(:user, name: 'ユーザーB', email: 'b@example.com')}
     let!(:task_a) {FactoryBot.create(:task, name: '最初のタスク', user: user_a)}
+    
     #beforeのログイン処理ではlogin_useのaかbのどちらかがログインするという具合に抽象化して書いておく
     before do
       #taskがcreateされるタイミングで初めてuser_aが呼ばれるのでここで初めてletの処理が行われ,user_aがデータベースに登録される
@@ -14,6 +15,7 @@ describe 'タスク管理機能' do
       fill_in 'パスワード', with: login_user.password
       click_button 'ログインする'
     end
+
     #共通するitがある場合はshared_examples_forでまとめることができる
     shared_examples_for 'ユーザーAが作成したタスクが表示される' do
       it { expect(page).to have_content '最初のタスク' }
@@ -45,6 +47,35 @@ describe 'タスク管理機能' do
       end
 
       it_behaves_like 'ユーザーAが作成したタスクが表示される'
+    end
+  end
+
+  dexcribe '新規登録機能' do
+    let(:login_user) {user_a}
+
+    before do
+      visit new_task_path
+      fill_in with: task_name
+      click_button '登録する'
+    end
+
+    context '新規作成画面で名称を入力したとき' do
+      let(:task_name) {'新規作成のテストを書く'}
+
+      it '正常に登録される' do
+        expect(page).to heve_selector '.alert-success', text: '新規作成のテストを書く'
+      end
+    end
+
+    context '新規作成画面で名称を入力しなかった時' do
+      let(:task_name) {''}
+
+      it 'エラーとなる' do
+        #withinのブロックの中でpageのにあようを検査することで、探索する範囲を画面内の特定の範囲に納めることができます
+        within '#error_explanation' do
+          expect(page).to have_content '名称を入力してください'
+        end
+      end
     end
   end
 end
