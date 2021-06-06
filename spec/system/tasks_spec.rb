@@ -50,12 +50,12 @@ describe 'タスク管理機能' do
     end
   end
 
-  dexcribe '新規登録機能' do
+  describe '新規登録機能' do
     let(:login_user) {user_a}
 
     before do
       visit new_task_path
-      fill_in with: task_name
+      fill_in '名称', with: task_name
       click_button '登録する'
     end
 
@@ -63,7 +63,7 @@ describe 'タスク管理機能' do
       let(:task_name) {'新規作成のテストを書く'}
 
       it '正常に登録される' do
-        expect(page).to heve_selector '.alert-success', text: '新規作成のテストを書く'
+        expect(page).to have_selector '.alert-success', text: '新規作成のテストを書く'
       end
     end
 
@@ -71,7 +71,8 @@ describe 'タスク管理機能' do
       let(:task_name) {''}
 
       it 'エラーとなる' do
-        #withinのブロックの中でpageのにあようを検査することで、探索する範囲を画面内の特定の範囲に納めることができます
+        # withinのブロックの中でpageの内容を検査することで、探索する範囲を画面内の特定の範囲に納めることができます
+        # 今回でいうと#error_explanationの中に'名称を入力してください'というエラーメッセージがあるか検証する
         within '#error_explanation' do
           expect(page).to have_content '名称を入力してください'
         end
