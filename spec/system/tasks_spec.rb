@@ -52,7 +52,8 @@ describe 'タスク管理機能' do
 
   describe '新規登録機能' do
     let(:login_user) {user_a}
-
+    let(:task_name) {'新規作成のテストを書く'} # <1>  task_nameのデフォルトとして設定
+    
     before do
       visit new_task_path
       fill_in '名称', with: task_name
@@ -60,8 +61,7 @@ describe 'タスク管理機能' do
     end
 
     context '新規作成画面で名称を入力したとき' do
-      let(:task_name) {'新規作成のテストを書く'} # <1>  task_nameのデフォルトとして設定
-
+      
       it '正常に登録される' do
         expect(page).to have_selector '.alert-success', text: '新規作成のテストを書く'
       end
@@ -88,4 +88,4 @@ letについて
   処理経路上に複数回、同じ名前のletを定義したときは常に下の階層に定義したletが使われる。 <1> 
   だが上書きを多用するとspecのコードの行数が大きくなった時にどのletが最終的に使われるのかわかりずらくなるという難点もあるため。
   適切なバランスで利用するように意識する
-  =end
+=end
