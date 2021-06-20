@@ -10,7 +10,12 @@ class ApplicationController < ActionController::Base
   def login_required
     redirect_to login_url unless current_user
   end
+
+  def set_locale
+    I18.locale = current_user&.locale || :ja
+  end
 end
+
 =begin 
 * current_user
 session[:user_id]が存在していればそのままcurrent_userを使用できる。
