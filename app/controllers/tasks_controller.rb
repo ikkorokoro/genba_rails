@@ -44,6 +44,11 @@ class TasksController < ApplicationController
   def set_task
     @task = current_user.tasks.find(params[:id])
   end
+
+  def confilm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
+  end
 =begin 
   もし悪意あるユーザーがURLに他のユーザーが作った、taskのid入れて,もしそのデータが存在していれば
   簡単に閲覧、編集、削除することができてしまうのでcurrent_user.task.findと記述し,ユーザーのデータの中かデータを探すようにする
